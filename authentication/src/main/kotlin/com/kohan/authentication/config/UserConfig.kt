@@ -19,7 +19,8 @@ class UserConfig(
     fun armeriaServerConfigurator(): ArmeriaServerConfigurator {
         return ArmeriaServerConfigurator { serverBuilder ->
             serverBuilder.annotatedService("/api", userService)
-            serverBuilder.service("prefix:/grpc/v1",
+            serverBuilder.service(
+                "prefix:/grpc/v1",
                 GrpcService.builder()
                     .addService(authenticationGrpcService)
                     .enableUnframedRequests(true)

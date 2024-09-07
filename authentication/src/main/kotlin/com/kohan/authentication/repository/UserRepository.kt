@@ -12,5 +12,4 @@ interface UserRepository : MongoRepository<UserCollection, ObjectId> {
 
     @Query("{'tokenInfos.token': ?0}")
     fun findByTokenInfosToken(token: String): UserCollection?
-
 }

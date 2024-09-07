@@ -4,7 +4,8 @@ import com.google.protobuf.gradle.protobuf
 
 plugins {
     alias(libs.plugins.protobuf)
-    alias(libs.plugins.spring.dependency.management) }
+    alias(libs.plugins.spring.dependency.management)
+}
 
 dependencyManagement {
     imports {
@@ -59,7 +60,6 @@ protobuf {
         }
     }
 }
-
 
 fun of(dependency: Provider<MinimalExternalModuleDependency>): String {
     val bom = dependency.get()
