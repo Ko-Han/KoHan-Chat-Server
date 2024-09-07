@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.kotlin.allopen)
 }
 
+
 dependencies {
     implementation(project(":shared-spring"))
 }

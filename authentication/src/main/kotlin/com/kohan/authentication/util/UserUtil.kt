@@ -13,14 +13,13 @@ class UserUtil(
 ) {
     fun toUserCollection(
         signUp: SignUp,
-        tokenInfo: TokenInfo,
     ): UserCollection {
         return UserCollection(
             email = signUp.email,
             password = passwordUtil.hash(signUp.password),
             nickname = signUp.nickname,
             profileImageUrl = fileClient.upload(),
-            tokenInfos = mutableListOf(tokenInfo),
+            tokenInfos = mutableListOf(),
         )
     }
 

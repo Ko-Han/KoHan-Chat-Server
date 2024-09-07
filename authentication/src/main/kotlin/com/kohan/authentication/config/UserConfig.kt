@@ -1,7 +1,9 @@
 package com.kohan.authentication.config
 
-import com.kohan.authentication.service.UserService
+import com.kohan.authentication.service.grpc.AuthenticationGrpcService
+import com.kohan.authentication.service.annotation.UserService
 import com.linecorp.armeria.server.docs.DocService
+import com.linecorp.armeria.server.grpc.GrpcService
 import com.linecorp.armeria.server.logging.AccessLogWriter
 import com.linecorp.armeria.server.logging.LoggingService
 import com.linecorp.armeria.spring.ArmeriaServerConfigurator
@@ -9,11 +11,20 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
-class UserConfig(private val userService: UserService) {
+class UserConfig(
+    private val userService: UserService,
+    private val authenticationGrpcService: AuthenticationGrpcService,
+) {
     @Bean
     fun armeriaServerConfigurator(): ArmeriaServerConfigurator {
         return ArmeriaServerConfigurator { serverBuilder ->
             serverBuilder.annotatedService("/api", userService)
+            serverBuilder.service("prefix:/grpc/v1",
+                GrpcService.builder()
+                    .addService(authenticationGrpcService)
+                    .enableUnframedRequests(true)
+                    .build(),
+            )
 
             serverBuilder.serviceUnder("/docs", DocService())
             serverBuilder.decorator(LoggingService.newDecorator())

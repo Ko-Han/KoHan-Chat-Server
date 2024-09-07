@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package com.kohan.shared.armeria.authentication.v1;
+
+message UserToken {
+  string token = 1;
+}
+
+message User {
+  string objectId = 1;
+  string email = 2;
+  string nickname = 3;
+}
+
+service AuthenticationService {
+  rpc authenticateUser(UserToken) returns (User) {}
+}

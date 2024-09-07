@@ -16,7 +16,7 @@ data class UserCollection(
     var nickname: String,
     /** File server request URL*/
     var profileImageUrl: String,
-    /** Access tokens used for user authentication <br>
+    /** Access tokens used for user authentication
      *
      *  A single user can use multiple devices with the same account */
     var tokenInfos: MutableList<TokenInfo>,
